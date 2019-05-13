@@ -1,28 +1,26 @@
 import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
-import createHistory from 'history/createBrowserHistory'
-import DashboardPage from '../components/DashboardPage'
-import HelpPage from '../components/HelpPage'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import NotFoundPage from '../components/NotFoundPage'
-import LoginPage from '../components/LoginPage'
-import PrivateRoute from './PrivateRoute'
-import PublicRoute from './PublicRoute'
 
-export const history = createHistory()
+import Header from '../components/Header';
+import HomePage from '../components/HomePage';
+import ContactPage from '../components/ContactPage';
+import PortfolioItemPage from '../components/PortfolioItemPage';
+import PortfolioPage from '../components/PortfolioPage';
 
 const AppRouter = () => (
-  // BrowserRouter always needs a single root element to work ie. <div></div>
-  <Router history={history}>
+  <BrowserRouter>
     <div>
-      {/* <Header /> is applied to every route */}
+      <Header />
       <Switch>
-        <PublicRoute path='/' component={LoginPage} exact={true} />
-        <PrivateRoute path='/dashboard' component={DashboardPage} />
-        <Route path='/help' component={HelpPage} />
+        <Route path="/" component={HomePage} exact={true} />
+        <Route path="/portfolio" component={PortfolioPage} exact={true} />
+        <Route path="/portfolio/:id" component={PortfolioItemPage} />
+        <Route path="contact" component={ContactPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
-  </Router>
-)
+  </BrowserRouter>
+);
 
-export default AppRouter
+export default AppRouter;
